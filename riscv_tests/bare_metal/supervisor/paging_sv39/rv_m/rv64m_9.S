@@ -639,25 +639,30 @@
                 bne \work_reg, \expected_val_reg, \test_label\()_cas_acquire# Doesn't match, retry
                 sc.d \work_reg, \desired_val_reg, (\lock_addr_reg) # Try to update.
                 bnez \work_reg, \test_label\()_cas_acquire # Retry if store-conditional failed.
-                li eturn_val_reg, 0 # Set return to success.
+                li 
+eturn_val_reg, 0 # Set return to success.
                 j \test_label\()_cas_acquired_lock
 
             \test_label\()_cas_acquire_fail:
-                li eturn_val_reg, 1 # Set return to failure.
+                li 
+eturn_val_reg, 1 # Set return to failure.
             \test_label\()_cas_acquired_lock:
                 fence
-        bnez eturn_val_reg, \test_label\()_exitjalr ra, \critical_section_addr_reg
+        bnez 
+eturn_val_reg, \test_label\()_exitjalr ra, \critical_section_addr_reg
             fence
             \test_label\()_cas_release:
                 lr.d \work_reg, (\lock_addr_reg) # Load original value.
                 bne \work_reg, \desired_val_reg, \test_label\()_cas_release# Doesn't match, retry
                 sc.d \work_reg, \expected_val_reg, (\lock_addr_reg) # Try to update.
                 bnez \work_reg, \test_label\()_cas_release # Retry if store-conditional failed.
-                li eturn_val_reg, 0 # Set return to success.
+                li 
+eturn_val_reg, 0 # Set return to success.
                 j \test_label\()_cas_released_lock
 
             \test_label\()_cas_release_fail:
-                li eturn_val_reg, 1
+                li 
+eturn_val_reg, 1
                 j failed
             \test_label\()_cas_released_lock:
         \test_label\()_exit:
@@ -874,45 +879,45 @@
             fld f31, 0(t0)
 
             #Initialize Vector Registers
-            li x4, 0x0
-            li x5, 0x4
-            li x6, 0xd8
-            li t0, check_excp
-            vsetvl x4,x5,x6
-            vmv.v.x v0,  x0
-            vmv.v.x v1,  x0
-            vmv.v.x v2,  x0
-            vmv.v.x v3,  x0
-            vmv.v.x v4,  x0
-            vmv.v.x v5,  x0
-            vmv.v.x v6,  x0
-            vmv.v.x v7,  x0
-            vmv.v.x v8,  x0
-            vmv.v.x v9,  x0
-            vmv.v.x v10, x0
-            vmv.v.x v11, x0
-            vmv.v.x v12, x0
-            vmv.v.x v13, x0
-            vmv.v.x v14, x0
-            vmv.v.x v15, x0
-            vmv.v.x v16, x0
-            vmv.v.x v17, x0
-            vmv.v.x v18, x0
-            vmv.v.x v19, x0
-            vmv.v.x v20, x0
-            vmv.v.x v21, x0
-            vmv.v.x v22, x0
-            vmv.v.x v23, x0
-            vmv.v.x v24, x0
-            vmv.v.x v25, x0
-            vmv.v.x v26, x0
-            vmv.v.x v27, x0
-            vmv.v.x v28, x0
-            vmv.v.x v29, x0
-            vmv.v.x v30, x0
-            vmv.v.x v31, x0
-
-        
+#            li x4, 0x0
+#            li x5, 0x4
+#            li x6, 0xd8
+#            li t0, check_excp
+#            vsetvl x4,x5,x6
+#            vmv.v.x v0,  x0
+#            vmv.v.x v1,  x0
+#            vmv.v.x v2,  x0
+#            vmv.v.x v3,  x0
+#            vmv.v.x v4,  x0
+#            vmv.v.x v5,  x0
+#            vmv.v.x v6,  x0
+#            vmv.v.x v7,  x0
+#            vmv.v.x v8,  x0
+#            vmv.v.x v9,  x0
+#            vmv.v.x v10, x0
+#            vmv.v.x v11, x0
+#            vmv.v.x v12, x0
+#            vmv.v.x v13, x0
+#            vmv.v.x v14, x0
+#            vmv.v.x v15, x0
+#            vmv.v.x v16, x0
+#            vmv.v.x v17, x0
+#            vmv.v.x v18, x0
+#            vmv.v.x v19, x0
+#            vmv.v.x v20, x0
+#            vmv.v.x v21, x0
+#            vmv.v.x v22, x0
+#            vmv.v.x v23, x0
+#            vmv.v.x v24, x0
+#            vmv.v.x v25, x0
+#            vmv.v.x v26, x0
+#            vmv.v.x v27, x0
+#            vmv.v.x v28, x0
+#            vmv.v.x v29, x0
+#            vmv.v.x v30, x0
+#            vmv.v.x v31, x0
+#
+#        
                 setup_medeleg:
                     # _if we are in supervisor or user mode, we will handle all the exceptions in
                     # supervisor mode
