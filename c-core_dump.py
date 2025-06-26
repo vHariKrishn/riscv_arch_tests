@@ -21,7 +21,7 @@ def run_command(command, shell=True):
 
 def process_elf_files():
     build_dir = "/home/harikrishna/riscv_arch_tests/riscv_tests/log/build"
-    dump_dir = "./sv39_core_dump"
+    dump_dir = "/home/harikrishna/Tenstorrent/c-class/sv39_tt/sv39_core_dump"
     os.makedirs(dump_dir, exist_ok=True)
 
     # Find all files with NO extension (no dot in filename)
